@@ -42,7 +42,7 @@ RUN set -ex; \
   npm install && npm run --no-update-notifier prod_compile:sass &&  npm run --no-update-notifier build && \
   cp -Rf "/tmp/homey/homey-api/." "/usr/local/share/homey/api" && \
   cp -Rf "/tmp/homey/homey/dist/." "/usr/local/share/homey/client/" && \
-  cp -Rf "/tmp/homey/dotenv.example" "/usr/local/share/homey/api/.env" && \
+  cp -Rf "/tmp/homey/dotenv.example" "/usr/local/share/template-files/config/dotenv.example" && \
   cd "/usr/local/share/homey/api" && pip install --no-cache-dir -r requirements.txt 
 
 COPY ./rootfs/. /
