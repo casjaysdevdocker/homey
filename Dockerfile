@@ -1,4 +1,4 @@
-FROM casjaysdevdocker/node:latest AS build
+FROM casjaysdevdocker/nodejs:latest AS build
 
 ARG ALPINE_VERSION="v3.16"
 
