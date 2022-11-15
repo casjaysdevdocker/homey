@@ -36,16 +36,15 @@ RUN set -ex; \
   if [ "${ALPINE_VERSION}" = "edge" ]; then echo "http://dl-cdn.alpinelinux.org/alpine/${ALPINE_VERSION}/testing" >>"/etc/apk/repositories" ; fi ; \
   apk update --update-cache && apk add --no-cache ${PACK_LIST}
 
-RUN mkdir -p "/usr/local/share/homey/client" "/usr/local/share/homey/api" && \
+RUN set -ex; \
+  mkdir -p "/usr/local/share/homey/client" "/usr/local/share/homey/api" && \
   git clone -q https://github.com/vlfldr/homey /tmp/homey && cd /tmp/homey/homey && \
-  npm install && \
-  npm run --no-update-notifier prod_compile:sass && \
-  npm run --no-update-notifier build && \
+  npm install && npm run --no-update-notifier prod_compile:sass &&  npm run --no-update-notifier build && \
   cp -Rf "/tmp/homey/homey/dist/." "/usr/local/share/homey/client/" && \
   cp -Rf "/tmp/homey/homey-api/." "/usr/local/share/homey/api" && \
-  cd "/usr/local/share/homey/api" && pip install --no-cache-dir -r requirements.txt && \
+  cd "/usr/local/share/homey/api" && pip install --no-cache-dir -r requirements.txt 
 
-  COPY ./rootfs/. /
+COPY ./rootfs/. /
 
 RUN echo 'Running cleanup' ; \
   rm -Rf /usr/share/doc/* /usr/share/info/* /tmp/* /var/tmp/* ; \
