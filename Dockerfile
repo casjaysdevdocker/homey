@@ -40,8 +40,9 @@ RUN set -ex; \
   mkdir -p "/usr/local/share/homey/client" "/usr/local/share/homey/api" && \
   git clone -q https://github.com/vlfldr/homey /tmp/homey && cd /tmp/homey/homey && \
   npm install && npm run --no-update-notifier prod_compile:sass &&  npm run --no-update-notifier build && \
-  cp -Rf "/tmp/homey/homey/dist/." "/usr/local/share/homey/client/" && \
+  cp -Rf "/tmp/homey/dotenv.example" "./homey-api/.env" && \
   cp -Rf "/tmp/homey/homey-api/." "/usr/local/share/homey/api" && \
+  cp -Rf "/tmp/homey/homey/dist/." "/usr/local/share/homey/client/" && \
   cd "/usr/local/share/homey/api" && pip install --no-cache-dir -r requirements.txt 
 
 COPY ./rootfs/. /
