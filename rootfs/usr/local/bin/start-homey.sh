@@ -124,7 +124,12 @@ fi
 [ -f "/config/.env.sh" ] && . "/config/.env.sh"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Actions based on env
-
+[ -f "/config/homey.yml" ] && ln -sf "/config/homey.yml" "/usr/local/share/homey/api/config/config.yml"
+[ -d "/data/homey/images" ] && cp -Rf "/data/homey/images/." "/usr/local/share/homey/client/public/images/"
+[ -d "/data/homey/sounds" ] && cp -Rf "/data/homey/sounds/." "/usr/local/share/homey/client/public/sounds/"
+[ -d "/data/homey/models" ] && cp -Rf "/data/homey/models/." "/usr/local/share/homey/client/public/models/"
+[ -d "/data/homey/icons" ] && cp -Rf "/data/homey/icons/." "/usr/local/share/homey/client/public/data/icons/"
+[ -f "/config/dotenv" ] && ln -sf "/config/dotenv" "/usr/local/share/homey/client/.env" || mv -f "/usr/local/share/homey/client/dotenv.example" "/usr/local/share/homey/api/.env"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # begin main app
 case "$1" in
